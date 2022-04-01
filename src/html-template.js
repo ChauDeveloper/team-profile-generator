@@ -2,7 +2,7 @@
 function generatedHTML (data) {
 
   
-console.log (Object.keys(data).length)
+// console.log (Object.keys(data).length)
 
 const CardsArr = []
 for (let i = 0; i < Object.keys(data).length; i++) {
@@ -39,7 +39,7 @@ for (let i = 0; i < Object.keys(data).length; i++) {
                                 <ul class="list-group list-group-flush">
                                 <li class="list-group-item">${data[i].id}</li>
                                 <li class="list-group-item"><a href = "mailto:${data[i].email}">${data[i].email}</a></li>
-                                <li class="list-group-item">${data[i].github}</li>
+                                <li class="list-group-item"><a href = "https://github.com/${data[i].github}">${data[i].github}</a></li>
                                 </ul>
                             </div>
                             </div>
