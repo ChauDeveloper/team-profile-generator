@@ -1,13 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-
-
-const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern');
-const Manager = require('./lib/Manager');
-const generatedHTML = require('./src/html-template');
-
-const dataArr = []
+const generateManager = require('./src/html-template');
+const generateEngineer = require('./src/html-template');
+const generateIntern = require('./src/html-template');
 
 function addManager() {
     inquirer.prompt([
@@ -64,10 +59,9 @@ function addManager() {
             }
         },
     ])
-        .then((data) => {
-            const manager = new Manager(data.managername, data.managerid, data.manageremail, data.managerofficenumber)
-            dataArr.push(manager)
-            addMember()
+        .then((manager) => {
+            writetoFile(generateManager({ ...manager }))
+            addMember();
         })
 
 }
@@ -126,10 +120,9 @@ function addEngineer() {
             }
         },
     ])
-        .then((data) => {
-            const engineer = new Engineer(data.engineername, data.engineerid, data.engineeremail, data.engineergithub)
-            dataArr.push(engineer)
-            addMember()
+        .then((engineer) => {
+            writetoFile(generateEngineer({ ...engineer }))
+            addMember();
         })
 }
 function addIntern() {
@@ -187,10 +180,9 @@ function addIntern() {
             }
         },
     ])
-        .then((data) => {
-            const intern = new Intern(data.internname, data.internid, data.internemail, data.internschool)
-            dataArr.push(intern)
-            addMember()
+        .then((intern) => {
+            writetoFile(generateIntern({ ...intern }))
+            addMember();
         })
 }
 function addMember() {
@@ -237,15 +229,12 @@ function confirmQuit() {
             switch (result.choice) {
                 case "Yes":
                     console.log("Congratulation! You've generated a beautiful page for your team at dist/generateHTML.html")
-                    // console.log(dataArr)    
-                    writetoFile(generatedHTML({...dataArr}))
                     break;
                 case "No":
                     addMember();
             }
         })
 }
-
 
 
 const writetoFile = data => {
@@ -263,8 +252,4 @@ const writetoFile = data => {
     })
 }
 
-
-
-addManager();
-
-
+addManager()
