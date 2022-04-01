@@ -74,7 +74,7 @@ for (let i = 0; i < Object.keys(data).length; i++) {
 
 }
 
-console.log(CardsArr)
+// console.log(CardsArr)
 const combinedCards = CardsArr.join('')
 
     return `
